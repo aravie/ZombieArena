@@ -1,5 +1,6 @@
 #include "pch.h"
 #include <sstream>
+#include <fstream>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Player.h"
@@ -150,6 +151,14 @@ int main()
 	scoreText.setCharacterSize(55);
 	scoreText.setFillColor(Color::White);
 	scoreText.setPosition(20, 0);
+
+	// Load teh high score from a text file
+	std::ifstream inputFile("gamedata/scores.txt");
+	if (inputFile.is_open())
+	{
+		inputFile >> hiScore;
+		inputFile.close();
+	}
 
 	// Hi Score
 	Text hiScoreText;
@@ -488,6 +497,9 @@ int main()
 					if (player.getHealth() <= 0)
 					{
 						state = State::GAME_OVER;
+						std::ofstream outputFile("gamedata/scores.txt");
+						outputFile << hiScore;
+						outputFile.close();
 					}
 				}
 			}// End Player touched
