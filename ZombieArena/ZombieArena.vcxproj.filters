@@ -30,6 +30,9 @@
     <ClInclude Include="Zombie.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -51,6 +54,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CreateHorde.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
