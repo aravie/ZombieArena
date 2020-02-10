@@ -122,6 +122,34 @@ int main()
 	gameOverText.setString("Press Enter to play");
 
 	// Levelling up
+	Text levelUpText;
+	levelUpText.setFont(font);
+	levelUpText.setCharacterSize(80);
+	levelUpText.setFillColor(Color::White);
+	levelUpText.setPosition(150, 250);
+	std::stringstream levelUpStream;
+	levelUpStream <<
+		"1- Increased rate of fire" <<
+		"\n2- Increased clip size(next reload)" <<
+		"\n3- Increased max health" <<
+		"\n4- Increased run speed" <<
+		"\n5- More and better health pickups" <<
+		"\n6- More and better ammo pickups";
+	levelUpText.setString(levelUpStream.str());
+
+	// Ammo
+	Text ammoText;
+	ammoText.setFont(font);
+	ammoText.setCharacterSize(55);
+	ammoText.setFillColor(Color::White);
+	ammoText.setPosition(200, 980);
+
+	// Score
+	Text scoreText;
+	scoreText.setFont(font);
+	scoreText.setCharacterSize(55);
+	scoreText.setFillColor(Color::White);
+	scoreText.setPosition(20, 0);
 
 	// Hi Score
 	Text hiScoreText;
@@ -154,6 +182,12 @@ int main()
 	RectangleShape healthBar;
 	healthBar.setFillColor(Color::Red);
 	healthBar.setPosition(450, 980);
+
+	// When did we last update the HUD?
+	int framesSinceLastHUDUpdate = 0;
+
+	// How often (in frames) should we update the HUD
+	int fpsMeasurementFrameInterval = 1000;
 
 	// The main game loop
 	while (window.isOpen())
@@ -471,6 +505,46 @@ int main()
 			{
 				bulletsSpare += ammoPickup.gotIt();
 			}
+
+			// size up the health bar
+			healthBar.setSize(Vector2f(player.getHealth() * 3, 70));
+
+			// Increment the number of frames
+			// Since the last HUD calculation
+			framesSinceLastHUDUpdate++;
+			// Calculate FPS every fpsMeasurementFrameInterval frames
+			if (framesSinceLastHUDUpdate > fpsMeasurementFrameInterval)
+			{
+
+				// Update game HUD text
+				std::stringstream ssAmmo;
+				std::stringstream ssScore;
+				std::stringstream ssHiScore;
+				std::stringstream ssWave;
+				std::stringstream ssZombiesAlive;
+
+				// Update the ammo text
+				ssAmmo << bulletsInClip << "/" << bulletsSpare;
+				ammoText.setString(ssAmmo.str());
+
+				// Update the score text
+				ssScore << "Score:" << score;
+				scoreText.setString(ssScore.str());
+
+				// Update the high score text
+				ssHiScore << "Hi Score:" << hiScore;
+				hiScoreText.setString(ssHiScore.str());
+
+				// Update the wave
+				ssWave << "Wave:" << wave;
+				waveNumberText.setString(ssWave.str());
+
+				// Update the high score text
+				ssZombiesAlive << "Zombies:" << numZombiesAlive;
+				zombiesRemainingText.setString(ssZombiesAlive.str());
+
+				framesSinceLastHUDUpdate = 0;
+			}// End HUD update
 
 		}// End updating the scene
 
