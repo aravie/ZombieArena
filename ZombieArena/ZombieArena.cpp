@@ -55,7 +55,7 @@ int main()
 
 	int numZombies;
 	int numZombiesAlive;
-	Zombie* zombies = nullptr;
+	Zombie* zombies = NULL;
 
 	// 100 bullets should do
 	Bullet bullets[100];
@@ -68,7 +68,7 @@ int main()
 	Time lastPressed;
 
 	// Hide the mouse pointer and replace it with crosshair
-	window.setMouseCursorVisible(false);
+	window.setMouseCursorVisible(true);
 	Sprite spriteCrosshair;
 	Texture textureCrosshair =
 		TextureHolder::GetTexture("graphics/crosshair.png");
@@ -87,7 +87,7 @@ int main()
 	// For the home/game over screen
 	Sprite spriteGameOver;
 	Texture textureGameOver =
-		TextureHolder::GetTexture("graphics/background1.png");
+		TextureHolder::GetTexture("graphics/background.png");
 	spriteGameOver.setTexture(textureGameOver);
 	spriteGameOver.setPosition(0, 0);
 
@@ -99,7 +99,7 @@ int main()
 	Texture textureAmmoIcon =
 		TextureHolder::GetTexture("graphics/ammo_icon.png");
 	spriteAmmoIcon.setTexture(textureAmmoIcon);
-	spriteAmmoIcon.setPosition(28, 620);
+	spriteAmmoIcon.setPosition(28, 980);
 
 	// Load the font
 	Font font;
@@ -589,18 +589,37 @@ int main()
 
 			// Draw the crosshair
 			window.draw(spriteCrosshair);
+
+			// Switch to the HUD view
+			window.setView(hudView);
+
+			// Draw all the HUD elements
+			window.draw(spriteAmmoIcon);
+			window.draw(ammoText);
+			window.draw(scoreText);
+			window.draw(hiScoreText);
+			window.draw(healthBar);
+			window.draw(waveNumberText);
+			window.draw(zombiesRemainingText);
 		}
 
 		if (state == State::LEVELING_UP)
 		{
+			window.draw(spriteGameOver);
+			window.draw(levelUpText);
 		}
 
 		if (state == State::PAUSED)
 		{
+			window.draw(pausedText);
 		}
 
 		if (state == State::GAME_OVER)
 		{
+			window.draw(spriteGameOver);
+			window.draw(gameOverText);
+			window.draw(scoreText);
+			window.draw(hiScoreText);
 		}
 
 		window.display();
