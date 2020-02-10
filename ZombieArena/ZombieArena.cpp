@@ -1,7 +1,5 @@
-// HelloSFML.cpp : Diese Datei enthält die Funktion "main". Hier beginnt und endet die Ausführung des Programms.
-//
-
 #include "pch.h"
+#include <sstream>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Player.h"
@@ -85,6 +83,77 @@ int main()
 	// About the game
 	int score = 0;
 	int hiScore = 0;
+
+	// For the home/game over screen
+	Sprite spriteGameOver;
+	Texture textureGameOver =
+		TextureHolder::GetTexture("graphics/background1.png");
+	spriteGameOver.setTexture(textureGameOver);
+	spriteGameOver.setPosition(0, 0);
+
+	// Create a view for the HUD
+	View hudView(sf::FloatRect(0, 0, resolution.x, resolution.y));
+
+	// Create a sprite for the ammo icon
+	Sprite spriteAmmoIcon;
+	Texture textureAmmoIcon =
+		TextureHolder::GetTexture("graphics/ammo_icon.png");
+	spriteAmmoIcon.setTexture(textureAmmoIcon);
+	spriteAmmoIcon.setPosition(28, 620);
+
+	// Load the font
+	Font font;
+	font.loadFromFile("fonts/zombiecontrol.ttf");
+
+	// Paused
+	Text pausedText;
+	pausedText.setFont(font);
+	pausedText.setCharacterSize(85);
+	pausedText.setFillColor(Color::White);
+	pausedText.setPosition(350, 200);
+	pausedText.setString("Press Enter \nto continue");
+
+	// Game Over
+	Text gameOverText;
+	gameOverText.setFont(font);
+	gameOverText.setCharacterSize(80);
+	gameOverText.setFillColor(Color::White);
+	gameOverText.setPosition(280, 540);
+	gameOverText.setString("Press Enter to play");
+
+	// Levelling up
+
+	// Hi Score
+	Text hiScoreText;
+	hiScoreText.setFont(font);
+	hiScoreText.setCharacterSize(55);
+	hiScoreText.setFillColor(Color::White);
+	hiScoreText.setPosition(1400, 0);
+	std::stringstream s;
+	s << "Hi Score:" << hiScore;
+	hiScoreText.setString(s.str());
+
+	// Zombies remaining
+	Text zombiesRemainingText;
+	zombiesRemainingText.setFont(font);
+	zombiesRemainingText.setCharacterSize(55);
+	zombiesRemainingText.setFillColor(Color::White);
+	zombiesRemainingText.setPosition(1500, 980);
+	zombiesRemainingText.setString("Zombies: 100");
+
+	// Wave number
+	int wave = 0;
+	Text waveNumberText;
+	waveNumberText.setFont(font);
+	waveNumberText.setCharacterSize(55);
+	waveNumberText.setFillColor(Color::White);
+	waveNumberText.setPosition(1250, 980);
+	waveNumberText.setString("Wave: 0");
+
+	// Health bar
+	RectangleShape healthBar;
+	healthBar.setFillColor(Color::Red);
+	healthBar.setPosition(450, 980);
 
 	// The main game loop
 	while (window.isOpen())
