@@ -169,7 +169,7 @@ void Player::update(float elapsedTime, Vector2i mousePosition)
 
 	if (m_Position.y < m_Arena.top + m_TileSize)
 	{
-		m_Position.y < m_Arena.top + m_TileSize;
+		m_Position.y = m_Arena.top + m_TileSize;
 	}
 
 	// Calculate the angle the player is facing
@@ -195,7 +195,7 @@ void Player::increaseHealthLevel(int amount)
 {
 	m_Health += amount;
 
-	// But not beyong the maximum
+	// But not beyond the maximum
 	if (m_Health > m_MaxHealth)
 	{
 		m_Health = m_MaxHealth;

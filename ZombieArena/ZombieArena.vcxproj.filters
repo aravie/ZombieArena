@@ -26,10 +26,10 @@
     <ClCompile Include="pch.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="HelloSFML.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="ZombieArena.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
