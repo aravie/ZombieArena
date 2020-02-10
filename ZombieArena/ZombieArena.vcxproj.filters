@@ -24,6 +24,9 @@
     <ClInclude Include="ZombieArena.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="TextureHolder.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -36,6 +39,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CreateBackground.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureHolder.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
